@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farhan Rashid | Mechatronics Engineer</title>
+<meta name="description" content="Farhan Rashid, Mechatronics Engineer. Automated container farms, LED grow lamps and IoT hardware, from schematic to production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f1f0f7;
+  --bg-2: #e9e7f3;
+  --fg: #12111a;
+  --muted: #6c6a7c;
+  --soft: #9a98aa;
+  --line: rgba(255, 255, 255, .85);
+  --line-2: rgba(120, 110, 170, .14);
+  --glass: rgba(255, 255, 255, .52);
+  --glass-2: rgba(255, 255, 255, .72);
+  --violet: #8b6cf6;
+  --violet-2: #6f7cf7;
+  --violet-soft: #ece7ff;
+  --shadow: 0 18px 50px -24px rgba(70, 55, 140, .28), 0 2px 6px -2px rgba(70, 55, 140, .06);
+  --radius: 22px;
+  --font: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 400 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+/* Soft lavender light washing over the page */
+.ambient {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(50vw 40vw at 82% 8%, rgba(167, 139, 250, .22), transparent 70%),
+    radial-gradient(40vw 34vw at 6% 30%, rgba(129, 140, 248, .14), transparent 70%),
+    radial-gradient(50vw 40vw at 90% 85%, rgba(196, 181, 253, .22), transparent 70%),
+    linear-gradient(180deg, #f6f5fb, var(--bg) 40%, var(--bg-2));
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 8px; }
+
+.shell { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: var(--gutter); }
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+}
+.panel { border-radius: 28px; padding: clamp(24px, 4vw, 44px); margin-top: 18px; position: relative; }
+.eyebrow { margin: 0 0 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--violet); }
+h2 { margin: 0; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.02em; }
+.head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px;
+  font-size: 14.5px; font-weight: 600; white-space: nowrap; cursor: pointer; border: 0;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn:hover { transform: translateY(-2px); }
+.btn-dark { background: #0f0e17; color: #fff; box-shadow: 0 14px 30px -12px rgba(15, 14, 23, .55), inset 0 1px 0 rgba(255,255,255,.15); }
+.btn-dark:hover { box-shadow: 0 18px 36px -12px rgba(111, 92, 230, .6); }
+.btn-light { background: var(--glass-2); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.btn-light:hover { background: #fff; }
+.btn-sm { padding: 10px 18px; font-size: 13.5px; }
+.round {
+  width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: var(--glass-2); border: 1px solid var(--line); box-shadow: 0 6px 16px -8px rgba(70, 55, 140, .35);
+  transition: background .25s, color .25s, transform .25s;
+}
+.round svg { width: 15px; height: 15px; }
+
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: 0; z-index: 50; padding-top: 16px; }
+.nav-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px 10px 10px 14px; border-radius: 24px;
+}
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.logo {
+  width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 14px;
+  background: #fff; box-shadow: 0 6px 16px -8px rgba(70, 55, 140, .4); font-weight: 800; font-size: 15px; letter-spacing: -.04em;
+}
+.brand b { display: block; font-size: 15px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.brand small { display: block; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.links { display: flex; gap: 2px; }
+.links a { position: relative; padding: 8px 14px; border-radius: 999px; font-size: 13.5px; color: var(--muted); transition: color .2s, background .2s; }
+.links a:hover { color: var(--fg); }
+.links a.active { background: #fff; color: var(--fg); box-shadow: 0 4px 12px -6px rgba(70, 55, 140, .35); }
+.links a.active::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--violet); }
+.menu-btn { display: none; }
+
+/* ---------- Hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; align-items: center; padding: clamp(32px, 5vw, 64px) clamp(8px, 3vw, 32px) 32px; }
+.hero h1 { margin: 6px 0 4px; font-size: clamp(44px, 6.2vw, 76px); line-height: 1.02; font-weight: 800; letter-spacing: -.035em; }
+.hero .role {
+  margin: 0; font-size: clamp(26px, 3.4vw, 42px); font-weight: 700; letter-spacing: -.025em; line-height: 1.15;
+  background: linear-gradient(90deg, #a77bf8, #7c83f8 60%, #8ea2ff); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .lede { margin: 22px 0 32px; max-width: 30em; color: var(--muted); font-size: 16.5px; }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; }
+.trusted { margin-top: 48px; }
+.trusted p { margin: 0 0 12px; font-size: 12.5px; color: var(--muted); }
+.logos { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; color: #8d8b9c; }
+.logos span { display: inline-flex; align-items: center; gap: 7px; font-size: 16px; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+.logos svg { width: 20px; height: 20px; }
+
+.portrait { position: relative; height: clamp(440px, 46vw, 560px); }
+.frame {
+  position: absolute; left: 8%; right: 10%; top: 13%; bottom: 0;
+  border-radius: 64px 64px 48px 48px; transform: rotate(-4deg);
+  background: linear-gradient(160deg, rgba(255,255,255,.55), rgba(236,231,255,.35));
+  border: 1.5px solid rgba(255, 255, 255, .95);
+  box-shadow: 0 30px 70px -30px rgba(111, 92, 230, .45), inset 0 0 40px rgba(255,255,255,.6);
+}
+.frame::after { /* soft violet glow at the base */
+  content: ""; position: absolute; inset: auto 10% -6% 10%; height: 30%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(139, 108, 246, .35), transparent); filter: blur(18px); z-index: -1;
+}
+/* Photo has a white backdrop: multiply drops the white into the page so only the person shows */
+.photo {
+  position: absolute; left: 8%; right: 10%; top: 13%; bottom: 0;
+  clip-path: inset(-40% 0 0 0 round 0 0 48px 48px);
+  mix-blend-mode: multiply;
+}
+.photo img {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-48%);
+  height: 128%; width: auto; max-width: none;
+  -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent);
+}
+.chip { position: absolute; border-radius: 20px; padding: 16px 18px; }
+.chip-years { top: 4%; right: 0; text-align: center; min-width: 96px; }
+.chip-years b { display: block; font-size: 40px; line-height: 1; font-weight: 300; background: linear-gradient(160deg, #b9a4ff, #6f7cf7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.chip-years b sup { font-size: .6em; }
+.chip-years span { display: block; margin-top: 8px; font-size: 11px; line-height: 1.3; color: var(--muted); }
+.chip-now { right: -2%; bottom: 14%; width: 190px; }
+.chip-now small { display: block; font-size: 11px; color: var(--muted); }
+.chip-now strong { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.01em; margin: 2px 0 6px; }
+.chip-now svg { width: 100%; height: 34px; }
+.orb {
+  position: absolute; left: -1%; top: 52%; width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fff, rgba(236,231,255,.75) 60%, rgba(196,181,253,.6));
+  border: 1px solid #fff; box-shadow: 0 16px 34px -14px rgba(111, 92, 230, .6);
+  animation: float 6s ease-in-out infinite;
+}
+.orb svg { width: 28px; height: 28px; color: var(--violet); }
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+/* ---------- About ---------- */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 26px; padding: 18px; border-radius: 20px; }
+.stat { padding: 6px 12px; }
+.stat .ic { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--violet-soft); color: var(--violet); margin-bottom: 12px; }
+.stat .ic svg { width: 16px; height: 16px; }
+.stat b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.stat span { font-size: 12px; color: var(--muted); }
+.about-copy p { margin: 0 0 26px; color: var(--muted); font-size: 15.5px; max-width: 36em; }
+
+/* ---------- Services ---------- */
+.cards4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.card {
+  position: relative; border-radius: 20px; padding: 24px 22px 56px; min-width: 0;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s;
+}
+.card:hover { transform: translateY(-6px); background: var(--glass-2); }
+.card .tile { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 24px; box-shadow: 0 8px 18px -8px currentColor, inset 0 1px 0 rgba(255,255,255,.7); }
+.card .tile svg { width: 20px; height: 20px; }
+.card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
+.card p { margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.card .round { position: absolute; right: 18px; bottom: 16px; width: 32px; height: 32px; }
+.card:hover .round { background: var(--fg); color: #fff; }
+.t-amber { background: linear-gradient(140deg, #ffe6c2, #ffcf8f); color: #d68a1c; }
+.t-violet { background: linear-gradient(140deg, #e5dcff, #c7b6ff); color: #7c5cf0; }
+.t-blue { background: linear-gradient(140deg, #dce5ff, #b3c4ff); color: #5b72f2; }
+.t-teal { background: linear-gradient(140deg, #d3f5f2, #a7e7e1); color: #20a59a; }
+.bubble {
+  position: absolute; right: -36px; top: 18px; width: 120px; height: 120px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 30% 28%, rgba(255,255,255,.95), rgba(255,255,255,.2) 38%, rgba(196,181,253,.25) 70%, rgba(255,255,255,.6));
+  border: 1px solid rgba(255,255,255,.9); box-shadow: inset -10px -14px 30px rgba(167,139,250,.25), 0 20px 40px -20px rgba(111,92,230,.45);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  animation: float 7s ease-in-out infinite;
+}
+
+/* ---------- Tools ---------- */
+.tools { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; }
+.tool { border-radius: 16px; padding: 16px 8px 12px; display: grid; justify-items: center; gap: 10px; text-align: center; transition: transform .25s; }
+.tool:hover { transform: translateY(-4px); }
+.tool i {
+  width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center;
+  font: 800 13px/1 var(--font); font-style: normal; letter-spacing: -.02em; color: #fff;
+}
+.tool span { font-size: 11.5px; color: var(--muted); line-height: 1.3; }
+
+/* ---------- Work ---------- */
+.works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.work { display: block; border-radius: 20px; padding: 10px; transition: transform .3s ease; }
+.work:hover { transform: translateY(-6px); }
+.work .thumb { aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: var(--violet-soft); position: relative; }
+.work .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.work:hover .thumb img { transform: scale(1.05); }
+.work .thumb video { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+.work .play {
+  position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 9px;
+  border-radius: 999px; font-size: 11.5px; font-weight: 600; color: #fff; background: rgba(18, 17, 26, .55);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.work .play svg { width: 14px; height: 14px; }
+.work p.desc { margin: 0; padding: 0 8px 8px; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+
+/* Video lightbox */
+.lightbox { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh; overflow: visible; }
+.lightbox::backdrop { background: rgba(18, 16, 30, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.lightbox video { display: block; max-width: 94vw; max-height: 86vh; border-radius: 18px; background: #000; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); }
+.lightbox .round { position: absolute; top: -14px; right: -14px; cursor: pointer; z-index: 1; }
+.lightbox video[hidden] { display: none; }
+.lightbox iframe { display: block; border: 0; border-radius: 18px; background: #000; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
+  width: min(94vw, calc(86vh * 16 / 9)); aspect-ratio: 16 / 9; }
+.lightbox iframe.vertical { width: min(94vw, calc(86vh * 9 / 16)); aspect-ratio: 9 / 16; }
+.lightbox p { margin: 10px 4px 0; color: #fff; font-size: 13.5px; font-weight: 600; text-align: center; }
+.work .badge { position: absolute; left: 10px; top: 10px; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.work .meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 8px 6px; }
+.work h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.work small { font-size: 12px; color: var(--muted); }
+.work:hover .round { background: var(--fg); color: #fff; }
+
+/* ---------- Process ---------- */
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 26px; counter-reset: s; }
+.step { position: relative; border-radius: 18px; padding: 18px; min-width: 0; transition: transform .25s; }
+.step:hover { transform: translateY(-4px); }
+.step:not(:last-child)::after { /* dotted connector to the next step */
+  content: ""; position: absolute; top: 50%; right: -24px; width: 22px; height: 2px;
+  background: radial-gradient(circle, var(--violet) 1px, transparent 1.5px) 0 0 / 6px 2px repeat-x; opacity: .7;
+}
+.step-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.step .ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--violet-soft); color: var(--violet); }
+.step .ic svg { width: 16px; height: 16px; }
+.step .num { font-size: 20px; font-weight: 300; color: var(--soft); }
+.step h3 { margin: 0 0 4px; font-size: 14.5px; font-weight: 700; }
+.step p { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.step.on { background: var(--glass-2); }
+.step.on .num { color: var(--violet); font-weight: 500; }
+
+/* ---------- Testimonials ---------- */
+.slider-wrap { position: relative; }
+.slider { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 36px) / 3); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 4px 24px; margin: -4px -4px -24px; }
+.slider::-webkit-scrollbar { display: none; }
+.quote { scroll-snap-align: start; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 22px; position: relative; margin: 0; }
+.quote::before { content: "\201D"; position: absolute; right: 20px; top: 14px; font: 800 52px/.8 Georgia, serif; color: #c4b5fd; }
+.quote blockquote { margin: 0; flex: 1; font-size: 13.5px; font-style: italic; color: #4b4a5a; padding-right: 30px; }
+.quote figcaption { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 700; font-size: 13px; color: #fff; background: linear-gradient(140deg, #a78bfa, #818cf8); }
+.quote b { display: block; font-size: 13.5px; }
+.quote small { font-size: 11.5px; color: var(--muted); }
+.placeholder-tag { display: inline-block; margin-left: 10px; vertical-align: middle; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; color: #8b5cf6; background: var(--violet-soft); border: 1px dashed #c4b5fd; }
+.arrows { display: flex; gap: 8px; }
+.arrows button { cursor: pointer; }
+.arrows button:hover { background: var(--fg); color: #fff; }
+
+/* ---------- Contact ---------- */
+.contact { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr) minmax(0, .55fr); gap: clamp(20px, 3vw, 40px); align-items: center; }
+.contact h2 { font-size: clamp(22px, 2.2vw, 28px); }
+.info { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 18px; }
+.info li { display: flex; align-items: center; gap: 14px; font-size: 13.5px; }
+.info .ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--glass-2); border: 1px solid var(--line); color: var(--muted); flex: none; }
+.info .ic svg { width: 16px; height: 16px; }
+form { border-radius: 22px; padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+form .full { grid-column: 1 / -1; }
+input, select, textarea {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.9);
+  background: rgba(255,255,255,.6); font-size: 13.5px; outline: none; transition: border-color .2s, box-shadow .2s, background .2s;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); }
+input:focus, select:focus, textarea:focus { background: #fff; border-color: #c4b5fd; box-shadow: 0 0 0 4px rgba(139, 108, 246, .12); }
+select { appearance: none; color: var(--muted); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236c6a7c' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+select.chosen { color: var(--fg); }
+textarea { min-height: 110px; resize: vertical; }
+form .btn { justify-content: center; width: min(100%, 300px); }
+.form-note { grid-column: 1 / -1; margin: 0; font-size: 12px; color: var(--muted); min-height: 1em; }
+.blob {
+  position: relative; justify-self: center; width: 100%; max-width: 200px; aspect-ratio: 1 / 1.25;
+  border-radius: 46% 54% 50% 50% / 40% 42% 58% 60%;
+  background:
+    radial-gradient(circle at 32% 26%, #fff 0, rgba(255,255,255,.4) 18%, transparent 36%),
+    radial-gradient(circle at 70% 75%, rgba(129, 140, 248, .75), transparent 55%),
+    linear-gradient(150deg, #efeaff, #c6b4ff 45%, #8f86f5 80%, #c7d2fe);
+  box-shadow: inset -18px -24px 50px rgba(91, 70, 220, .35), inset 14px 16px 40px rgba(255,255,255,.7), 0 40px 60px -30px rgba(111, 92, 230, .6);
+  animation: morph 12s ease-in-out infinite;
+}
+.blob::after { content: ""; position: absolute; inset: 14% -16% 30% 30%; border-radius: 50%; border: 10px solid rgba(255,255,255,.45); transform: rotate(-24deg); filter: blur(1px); }
+@keyframes morph {
+  50% { border-radius: 54% 46% 44% 56% / 48% 38% 62% 52%; transform: translateY(-10px) rotate(4deg); }
+}
+
+footer { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding: 26px 8px 36px; font-size: 12.5px; color: var(--muted); }
+footer .brand b { font-size: 13.5px; }
+.social { display: flex; gap: 8px; }
+.social a:hover { background: var(--fg); color: #fff; }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .tools { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .step::after { display: none; }
+  .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .blob { display: none; }
+}
+@media (max-width: 920px) {
+  .links, .nav-cta { display: none; }
+  .menu-btn { display: grid; cursor: pointer; }
+  .nav.open .links {
+    display: grid; position: absolute; left: var(--gutter); right: var(--gutter); top: calc(100% + 8px);
+    padding: 10px; border-radius: 20px; background: rgba(255,255,255,.92); box-shadow: var(--shadow);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  }
+  .nav.open .links a { padding: 12px 16px; }
+  .nav.open .links a.active::after { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .portrait { max-width: 520px; width: 100%; justify-self: center; }
+  .about { grid-template-columns: 1fr; }
+  .cards4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .works { grid-template-columns: 1fr 1fr; }
+  .slider { grid-auto-columns: calc((100% - 18px) / 2); }
+  .contact { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .panel { border-radius: 22px; }
+  .hero { padding-inline: 4px; }
+  .portrait { height: 116vw; max-height: 500px; }
+  .chip-now { width: 160px; padding: 12px 14px; }
+  .chip-years { padding: 12px; min-width: 80px; }
+  .chip-years b { font-size: 32px; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; padding: 12px 6px; }
+  .stat { padding: 4px 8px; }
+  .cards4, .works { grid-template-columns: 1fr; }
+  .tools { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .tool { padding: 12px 4px 10px; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .slider { grid-auto-columns: 88%; }
+  form { grid-template-columns: 1fr; padding: 16px; }
+  .bubble { display: none; }
+  .brand small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"></div>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M2 21h20M8 7h4M8 11h4M8 15h4"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 13l-8 8-3-3 1.7-1.7a4 4 0 0 0-5-5L3 7l4-4z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V10l6 4V10l6 4V6l8-3v17zM2 20h20"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5-6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5c.6 4.8 2.2 8.4 10.5 10.5-8.3 2.1-9.9 5.7-10.5 10.5C11.4 17.7 9.8 14.1 1.5 12 9.8 9.9 11.4 6.3 12 1.5z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav shell" id="nav">
+  <nav class="nav-bar glass" aria-label="Main">
+    <a class="brand" href="#home">
+      <span class="logo">FR</span>
+      <span><b>Farhan Rashid</b><small>Mechatronics Engineer</small></span>
+    </a>
+    <div class="links" id="links">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn btn-light btn-sm nav-cta" href="#contact">Let's Talk <svg><use href="#i-arrow"/></svg></a>
+    <button class="round menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="reveal">
+      <p class="eyebrow">Hello, I'm</p>
+      <h1>Farhan Rashid</h1>
+      <p class="role">Mechatronics Engineer</p>
+      <p class="lede">I build the machines behind controlled-environment farming, from the first schematic to hardware running on the floor.</p>
+      <div class="cta">
+        <a class="btn btn-dark" href="#work">View My Work <svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-light" href="assets/Farhan-Rashid-CV.pdf" download>Download CV <svg><use href="#i-down"/></svg></a>
+      </div>
+      <div class="trusted">
+        <p>Worked with</p>
+        <div class="logos">
+          <span><svg><use href="#i-leaf"/></svg>Honest Greens</span>
+          <span><svg><use href="#i-wifi"/></svg>Techneed</span>
+          <span><svg><use href="#i-factory"/></svg>K&amp;K</span>
+          <span><svg><use href="#i-yt"/></svg>YouTube</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portrait reveal">
+      <div class="frame" aria-hidden="true"></div>
+      <div class="photo"><img src="assets/rashid.jpg" alt="Portrait of Farhan Rashid in glasses and a cream shirt" width="1100" height="1467"></div>
+      <div class="orb" aria-hidden="true"><svg><use href="#i-spark"/></svg></div>
+      <div class="chip chip-years glass"><b>5<sup>+</sup></b><span>Years of<br>Experience</span></div>
+      <div class="chip chip-now glass">
+        <small>Currently at</small>
+        <strong>Honest Greens</strong>
+        <svg viewBox="0 0 160 34" fill="none" aria-hidden="true">
+          <defs><linearGradient id="spark-g" x1="0" x2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c83f8"/></linearGradient></defs>
+          <path d="M2 28c12-2 16-10 28-9s16 8 28 4 14-12 26-12 16 9 28 6 16-14 28-15 14 0 18-1" stroke="url(#spark-g)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="panel glass reveal" id="about">
+    <div class="about">
+      <div>
+        <p class="eyebrow">About me</p>
+        <h2>Engineering with Precision<br>Building for the Field</h2>
+        <div class="stats glass">
+          <div class="stat"><span class="ic"><svg><use href="#i-clock"/></svg></span><b>5+</b><span>Years Experience</span></div>
+          <div class="stat"><span class="ic"><svg><use href="#i-building"/></svg></span><b>3</b><span>Companies</span></div>
+          <div class="stat"><span class="ic"><svg><use href="#i-tool"/></svg></span><b>15+</b><span>Tools &amp; Platforms</span></div>
+        </div>
+      </div>
+      <div class="about-copy">
+        <p>I'm a mechatronics engineer who plans, prototypes and tests complex electro-mechanical systems, mostly for agriculture. My work covers firmware, PCB design, mechanical parts and the automation that ties them together, currently at Honest Greens, building automated container farms.</p>
+        <a class="btn btn-light btn-sm" href="assets/Farhan-Rashid-CV.pdf" target="_blank" rel="noopener">More About Me <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="panel glass reveal" id="services">
+    <div class="bubble" aria-hidden="true"></div>
+    <p class="eyebrow">What I do</p>
+    <h2 style="margin-bottom:28px">Services I Offer</h2>
+    <div class="cards4">
+      <a class="card glass" href="#grow-lamp">
+        <span class="tile t-amber"><svg><use href="#i-chip"/></svg></span>
+        <h3>PCB Design</h3>
+        <p>Schematic capture and multi-layer board layout in Altium and KiCad, ready for SMT assembly.</p>
+        <span class="round"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card glass" href="#cooler-truck">
+        <span class="tile t-violet"><svg><use href="#i-wifi"/></svg></span>
+        <h3>Embedded &amp; IoT</h3>
+        <p>ESP32 and Raspberry Pi firmware, sensors and connected devices that report from the field.</p>
+        <span class="round"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card glass" href="#work">
+        <span class="tile t-blue"><svg><use href="#i-cube"/></svg></span>
+        <h3>Mechanical Design</h3>
+        <p>Enclosures, brackets and assemblies in SolidWorks and AutoCAD, designed to be built.</p>
+        <span class="round"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="card glass" href="#vertical-tower">
+        <span class="tile t-teal"><svg><use href="#i-gear"/></svg></span>
+        <h3>Automation</h3>
+        <p>Irrigation, climate and lighting control for farms, with PLCs and custom controllers.</p>
+        <span class="round"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="panel glass reveal" id="tools">
+    <p class="eyebrow">Tools &amp; skills</p>
+    <h2 style="margin-bottom:24px">Technologies I Use</h2>
+    <div class="tools">
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#a3895b,#6b5634)">Ad</i><span>Altium</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#3b82f6,#1e3a8a)">Ki</i><span>KiCad</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#ef4444,#b91c1c)">SW</i><span>SolidWorks</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#f43f5e,#9f1239)">A</i><span>AutoCAD</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#475569,#0f172a)">32</i><span>ESP32</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#e11d48,#7f1d1d)">Pi</i><span>Raspberry Pi</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#3b82f6,#eab308)">Py</i><span>Python</span></div>
+      <div class="tool glass"><i style="background:linear-gradient(140deg,#14b8a6,#0f766e)">PLC</i><span>PLC</span></div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="panel glass reveal" id="work">
+    <div class="head-row" style="margin-bottom:22px">
+      <div><p class="eyebrow">Featured projects</p><h2>Selected Work</h2></div>
+      <a class="btn btn-light btn-sm" href="https://www.youtube.com/@mohamedrashid2481" target="_blank" rel="noopener">View All Projects <svg><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="works">
+      <a class="work glass" id="vertical-tower" href="https://youtube.com/shorts/VkBdTvIT5wA" target="_blank" rel="noopener" data-youtube="VkBdTvIT5wA" data-vertical data-title="Vertical Farm Tower Assembly">
+        <div class="thumb">
+          <img src="assets/tower.jpg" alt="Tiers of lettuce under LED grow lights in the vertical farm tower" loading="lazy">
+          <span class="badge">Team lead</span>
+          <span class="play"><svg><use href="#i-play"/></svg>Watch · 0:20</span>
+        </div>
+        <div class="meta"><div><h3>Vertical Farm Tower Assembly</h3><small>Team Lead · Automation</small></div><span class="round"><svg><use href="#i-arrow"/></svg></span></div>
+        <p class="desc">Led a team of electrical and PVC workers to build a multi-tier hydroponic growing tower, and did the automation work for it.</p>
+      </a>
+      <a class="work glass" id="container-farm" href="https://www.youtube.com/watch?v=Vmw_q5faH8c" target="_blank" rel="noopener">
+        <div class="thumb"><img src="assets/container-farm.jpg" alt="Green Honest Greens shipping-container farm on site" loading="lazy"><span class="badge">Project lead</span></div>
+        <div class="meta"><div><h3>Smart Container Farm</h3><small>Automation · IoT</small></div><span class="round"><svg><use href="#i-arrow"/></svg></span></div>
+        <p class="desc">A fully automated hydroponic farm in a shipping container: irrigation, LED lighting, climate control and ESP32 monitoring.</p>
+      </a>
+      <a class="work glass" id="grow-lamp" href="assets/grow-lamp-manufacturing.mp4" data-video="assets/grow-lamp-manufacturing.mp4" data-title="Grow Lamp Manufacturing">
+        <div class="thumb"><img src="assets/lamp-crop.jpg" alt="Lettuce growing under rows of LED grow lamps" loading="lazy"><span class="badge">Design to production</span><span class="play"><svg><use href="#i-play"/></svg>Watch · 1:18</span></div>
+        <div class="meta"><div><h3>Grow Lamp Manufacturing</h3><small>PCB Design · Production</small></div><span class="round"><svg><use href="#i-arrow"/></svg></span></div>
+        <p class="desc">LED grow lamp boards taken from schematic and layout through SMT assembly and bench testing to the growing rack.</p>
+      </a>
+      <a class="work glass" id="cooler-truck" href="https://www.youtube.com/watch?v=C-3CpGjix_k" target="_blank" rel="noopener">
+        <div class="thumb"><img src="assets/cooler-truck.jpg" alt="Monitoring unit open on a bench, with controller board, regulator and battery cells" loading="lazy"><span class="badge">IoT hardware</span></div>
+        <div class="meta"><div><h3>Cooler Truck Monitoring</h3><small>Embedded · Battery Power</small></div><span class="round"><svg><use href="#i-arrow"/></svg></span></div>
+        <p class="desc">A battery-powered monitoring unit for refrigerated trucks, with the controller, regulator and cells packed into one enclosure.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="panel glass reveal" id="process">
+    <p class="eyebrow">My process</p>
+    <h2 style="margin-bottom:26px">Engineering Process I Follow</h2>
+    <div class="steps" id="steps">
+      <div class="step glass"><div class="step-top"><span class="ic"><svg><use href="#i-search"/></svg></span><span class="num">01</span></div><h3>Discover</h3><p>Understand the crop, the site and the problem to solve.</p></div>
+      <div class="step glass"><div class="step-top"><span class="ic"><svg><use href="#i-pen"/></svg></span><span class="num">02</span></div><h3>Design</h3><p>Schematics, PCB layout and mechanical CAD.</p></div>
+      <div class="step glass"><div class="step-top"><span class="ic"><svg><use href="#i-flask"/></svg></span><span class="num">03</span></div><h3>Prototype</h3><p>Build fast, wire it up and write the firmware.</p></div>
+      <div class="step glass on"><div class="step-top"><span class="ic"><svg><use href="#i-check"/></svg></span><span class="num">04</span></div><h3>Test</h3><p>Bench test, measure and fix before it ships.</p></div>
+      <div class="step glass"><div class="step-top"><span class="ic"><svg><use href="#i-factory"/></svg></span><span class="num">05</span></div><h3>Produce</h3><p>Assembly, installation and support on the floor.</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="panel glass reveal" id="testimonials">
+    <div class="head-row" style="margin-bottom:24px">
+      <div><p class="eyebrow">Testimonials</p><h2>What Colleagues Say <span class="placeholder-tag">Replace with real quotes</span></h2></div>
+      <div class="arrows">
+        <button class="round" type="button" id="prev" aria-label="Previous testimonial"><svg><use href="#i-left"/></svg></button>
+        <button class="round" type="button" id="next" aria-label="Next testimonial"><svg><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+    <div class="slider" id="slider">
+      <figure class="quote glass"><blockquote>"[Placeholder: a real quote from a teammate about a project you built together.]"</blockquote><figcaption><span class="avatar">A</span><div><b>[Name]</b><small>[Role, Company]</small></div></figcaption></figure>
+      <figure class="quote glass"><blockquote>"[Placeholder: a real quote about how you solve problems on the production floor.]"</blockquote><figcaption><span class="avatar">B</span><div><b>[Name]</b><small>[Role, Company]</small></div></figcaption></figure>
+      <figure class="quote glass"><blockquote>"[Placeholder: a real quote from a manager or client about the results of your work.]"</blockquote><figcaption><span class="avatar">C</span><div><b>[Name]</b><small>[Role, Company]</small></div></figcaption></figure>
+      <figure class="quote glass"><blockquote>"[Placeholder: add as many quotes as you like; the arrows scroll through them.]"</blockquote><figcaption><span class="avatar">D</span><div><b>[Name]</b><small>[Role, Company]</small></div></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="panel glass reveal" id="contact">
+    <div class="contact">
+      <div>
+        <p class="eyebrow">Let's connect</p>
+        <h2>Have a project in mind?<br>Let's build something that works in the real world.</h2>
+        <ul class="info">
+          <li><span class="ic"><svg><use href="#i-mail"/></svg></span><a href="mailto:mohamedrashid517@gmail.com" id="email-link">mohamedrashid517@gmail.com</a></li>
+          <li><span class="ic"><svg><use href="#i-phone"/></svg></span><a href="tel:+94772893903">+94 77 2893903</a></li>
+          <li><span class="ic"><svg><use href="#i-pin"/></svg></span><span>Galle, Sri Lanka</span></li>
+        </ul>
+      </div>
+      <form class="glass" id="contact-form" novalidate>
+        <input name="name" placeholder="Your Name" aria-label="Your name" required>
+        <input name="email" type="email" placeholder="Your Email" aria-label="Your email" required>
+        <select name="project" class="full" aria-label="Project type" id="project">
+          <option value="" selected disabled>Your Project</option>
+          <option>PCB design</option>
+          <option>Embedded / IoT device</option>
+          <option>Mechanical design</option>
+          <option>Farm automation</option>
+          <option>Something else</option>
+        </select>
+        <textarea name="message" class="full" placeholder="Your Message" aria-label="Your message" required></textarea>
+        <button class="btn btn-dark full" type="submit">Send Message <svg><use href="#i-send"/></svg></button>
+        <p class="form-note" id="form-note" aria-live="polite"></p>
+      </form>
+      <div class="blob" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <footer>
+    <a class="brand" href="#home"><span class="logo" style="width:34px;height:34px;border-radius:11px;font-size:13px">FR</span><b>Farhan Rashid</b></a>
+    <span>© <span id="year">2026</span> Farhan Rashid. All rights reserved.</span>
+    <div class="social">
+      <a class="round" href="https://www.youtube.com/@mohamedrashid2481" target="_blank" rel="noopener" aria-label="YouTube channel"><svg><use href="#i-yt"/></svg></a>
+      <a class="round" href="#home" aria-label="Back to top"><svg style="transform:rotate(-45deg)"><use href="#i-arrow"/></svg></a>
+    </div>
+  </footer>
+</main>
+
+<dialog class="lightbox" id="lightbox" aria-label="Project video">
+  <button class="round" type="button" aria-label="Close video"><svg style="transform:rotate(45deg)"><use href="#i-plus"/></svg></button>
+  <video controls playsinline></video>
+  <p></p>
+</dialog>
+
+<script>
+(function () {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  var nav = document.getElementById('nav'), menuBtn = document.getElementById('menu-btn');
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#links a').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
+  });
+
+  // Highlight the nav link for the section in view
+  var links = Array.prototype.slice.call(document.querySelectorAll('#links a'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function setActive() {
+    var y = window.scrollY + 140, idx = 0;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= y) idx = i; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) idx = sections.length - 1;
+    links.forEach(function (a, i) { a.classList.toggle('active', i === idx); });
+  }
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  // Reveal on scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Process steps: highlight on hover
+  var steps = document.querySelectorAll('#steps .step');
+  steps.forEach(function (s) {
+    s.addEventListener('mouseenter', function () { steps.forEach(function (o) { o.classList.toggle('on', o === s); }); });
+  });
+
+  // Testimonial arrows
+  var slider = document.getElementById('slider');
+  function slide(dir) {
+    var card = slider.querySelector('.quote');
+    slider.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: 'smooth' });
+  }
+  document.getElementById('prev').addEventListener('click', function () { slide(-1); });
+  document.getElementById('next').addEventListener('click', function () { slide(1); });
+
+  // Project videos open in a lightbox: local files in a <video>, YouTube ones in an embedded player
+  var box = document.getElementById('lightbox'), boxVideo = box.querySelector('video'), boxTitle = box.querySelector('p'), frame = null;
+  document.querySelectorAll('.work[data-video], .work[data-youtube]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (!box.showModal) return; // very old browsers just follow the link
+      e.preventDefault();
+      boxTitle.textContent = card.dataset.title || '';
+      if (card.dataset.youtube) {
+        boxVideo.hidden = true;
+        frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + card.dataset.youtube + '?autoplay=1&rel=0&playsinline=1';
+        frame.title = card.dataset.title || 'Project video';
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        frame.allowFullscreen = true;
+        if (card.hasAttribute('data-vertical')) frame.className = 'vertical';
+        box.insertBefore(frame, boxVideo);
+        box.showModal();
+      } else {
+        boxVideo.hidden = false;
+        boxVideo.src = card.dataset.video;
+        box.showModal();
+        var p = boxVideo.play(); if (p && p.catch) p.catch(function () {});
+      }
+    });
+  });
+  function cleanBox() {
+    boxVideo.pause(); boxVideo.removeAttribute('src'); boxVideo.load();
+    if (frame) { frame.remove(); frame = null; } // removing the iframe stops YouTube playback
+  }
+  box.querySelector('button').addEventListener('click', function () { box.close(); });
+  box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+  box.addEventListener('close', cleanBox);
+
+  // Contact form: opens the visitor's mail app with the message filled in
+  var project = document.getElementById('project');
+  project.addEventListener('change', function () { project.classList.add('chosen'); });
+  var form = document.getElementById('contact-form'), note = document.getElementById('form-note');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    if (!f.name.value.trim() || !f.email.value.trim() || !f.message.value.trim()) {
+      note.textContent = 'Please fill in your name, email and message.';
+      return;
+    }
+    var to = document.getElementById('email-link').textContent.trim();
+    var subject = 'Project enquiry' + (f.project.value ? ': ' + f.project.value : '') + ' from ' + f.name.value.trim();
+    var body = f.message.value.trim() + '\n\n' + f.name.value.trim() + '\n' + f.email.value.trim();
+    window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    note.textContent = 'Opening your email app…';
+  });
+})();
+</script>
+</body>
+</html>
